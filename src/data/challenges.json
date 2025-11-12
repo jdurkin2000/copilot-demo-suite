@@ -1,0 +1,34 @@
+[
+  {
+    "id": "refactor-1",
+    "title": "Extract Validation Logic",
+    "description": "This function handles both validation and business logic. Use Copilot to extract the validation into a separate function.",
+    "category": "refactoring",
+    "difficulty": "beginner",
+    "language": "javascript",
+    "startingCode": "function processUserData(user) {\n  // Validate user\n  if (!user.name) {\n    throw new Error('Name is required');\n  }\n  if (!user.email.includes('@')) {\n    throw new Error('Valid email is required');\n  }\n  if (user.age < 18) {\n    throw new Error('User must be 18 or older');\n  }\n  \n  // Process data\n  user.name = user.name.trim();\n  user.email = user.email.toLowerCase();\n  \n  // Save to database\n  database.save(user);\n  \n  return user;\n}",
+    "validation": {
+      "type": "ast",
+      "requiredPatterns": ["function validateUser", "throw new Error"],
+      "forbiddenPatterns": ["if (!user.name)", "if (!user.email.includes"]
+    },
+    "hints": [
+      {
+        "id": "hint-1",
+        "text": "Select the validation logic and try Copilot's 'Extract function' feature",
+        "requiredAttempts": 1,
+        "copilotPromptExample": "Extract the validation logic into a function called validateUser"
+      }
+    ],
+    "copilotPrompts": [
+      "Extract the validation logic into a separate function",
+      "Create a validateUser function that checks name, email, and age",
+      "Refactor this to separate concerns: validation vs business logic"
+    ],
+    "learningObjectives": [
+      "Understand function extraction",
+      "Learn to separate validation from business logic",
+      "Practice using Copilot for code organization"
+    ]
+  }
+]
