@@ -31,3 +31,7 @@ completion event - extensionInstalled:myExt.id: Check off step if the given exte
 __Click Challenges View:__
 provide image of icon
 completion event - onView:myView.id: Check off once challenge view is opened
+
+
+***Sources:***
+https://docs.github.com/en/actions/get-started/quickstart
