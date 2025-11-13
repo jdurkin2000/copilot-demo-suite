@@ -1,12 +1,10 @@
 import * as vscode from "vscode";
-import * as fs from "fs";
 import challenges from "../data/challenges.json";
-import { CodingChallenge } from "../models/challenge";
 
 export class CodingChallengeProvider
   implements vscode.TreeDataProvider<ChallengeTreeItem>
 {
-  constructor(private workspaceRoot: string | undefined) {}
+  constructor() {}
 
   getTreeItem(
     element: ChallengeTreeItem

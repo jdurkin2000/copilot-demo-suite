@@ -12,13 +12,8 @@ export function activate(context: vscode.ExtensionContext) {
     'Congratulations, your extension "copilot-demo-suite" is now active!'
   );
 
-  const rootPath =
-    vscode.workspace.workspaceFolders &&
-    vscode.workspace.workspaceFolders.length > 0
-      ? vscode.workspace.workspaceFolders[0].uri.fsPath
-      : undefined;
   vscode.window.createTreeView("codingChallenge", {
-    treeDataProvider: new CodingChallengeProvider(rootPath),
+    treeDataProvider: new CodingChallengeProvider(),
   });
 
   // The command has been defined in the package.json file
