@@ -40,7 +40,7 @@ jobs:
         CI: true
       
     - name: Run tests (if you have them)
-      run: npm test --if-present
+      run: xvfb-run -a npm test --if-present
       env:
         CI: true
         NODE_ENV: test
