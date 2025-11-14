@@ -12,16 +12,6 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "copilot-demo-suite.helloWorld",
-        "title": "Hello Extension"
-      },
-      {
-        "command": "copilot-demo-suite.displayTime",
-        "title": "Show Time"
-      }
-    ],
     "viewsContainers": {
       "activitybar": [
         {
