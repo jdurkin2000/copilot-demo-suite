@@ -1,43 +1,34 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
-import { CodingChallengeProvider } from "./utils/codingChallengeProvider";
+import { CodingChallengeProvider, ChallengeTreeItem } from "./utils/codingChallengeProvider";
+import { markChallengeCompleted } from "./utils/userInfo";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+let extensionContext: vscode.ExtensionContext;
+
 export function activate(context: vscode.ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log(
-    'Congratulations, your extension "copilot-demo-suite" is now active!'
-  );
+  extensionContext = context;
 
-  vscode.window.createTreeView("codingChallenge", {
-    treeDataProvider: new CodingChallengeProvider(),
-  });
+  const challengeProvider = new CodingChallengeProvider();
+  const disposables = [
+    vscode.window.registerTreeDataProvider(
+      "codingChallenge",
+      challengeProvider
+    ),
+    vscode.commands.registerCommand(
+      "codingChallengeProvider.refreshEntry",
+      () => challengeProvider.refresh()
+    ),
+    vscode.commands.registerCommand(
+      "codingChallengeProvider.markCompleted",
+      (node: ChallengeTreeItem) => markChallengeCompleted(node.description as string)
+    ),
+  ];
 
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  const disposable = vscode.commands.registerCommand(
-    "copilot-demo-suite.helloWorld",
-    () => {
-      // The code you place here will be executed every time your command is executed
-      // Display a message box to the user
-      vscode.window.showInformationMessage("Hello From Me");
-    }
-  );
-
-  const disposable1 = vscode.commands.registerCommand(
-    "copilot-demo-suite.displayTime",
-    () => {
-      vscode.window.showWarningMessage(Date.now().toString());
-    }
-  );
-
-  context.subscriptions.push(disposable);
-  context.subscriptions.push(disposable1);
+  context.subscriptions.push(...disposables);
 }
 
 // This method is called when your extension is deactivated
 export function deactivate() {}
+
+export function getGlobalState() {
+  return extensionContext.globalState;
+}

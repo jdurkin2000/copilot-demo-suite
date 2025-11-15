@@ -35,3 +35,4 @@ completion event - onView:myView.id: Check off once challenge view is opened
 
 ***Sources:***
 https://docs.github.com/en/actions/get-started/quickstart
+https://code.visualstudio.com/api

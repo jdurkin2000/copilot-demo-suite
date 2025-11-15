@@ -12,6 +12,18 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "codingChallengeProvider.refreshEntry",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "codingChallengeProvider.markCompleted",
+        "title": "Mark Challenge As Completed",
+        "icon": "$(check)"
+      }
+    ],
     "viewsContainers": {
       "activitybar": [
         {
@@ -28,6 +40,22 @@
           "name": "Coding Challenges",
           "contextualTitle": "Challenge Explorer",
           "icon": "$(copilot)"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "codingChallengeProvider.refreshEntry",
+          "when": "view === codingChallenge",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "codingChallengeProvider.markCompleted",
+          "when": "view === codingChallenge",
+          "group": "inline"
         }
       ]
     }
