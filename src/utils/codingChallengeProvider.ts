@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import challenges from "../data/challenges.json";
 import { hasCompletedChallenge } from "./userInfo";
-import { CodingChallenge } from "../models/challenge";
 
 export class CodingChallengeProvider
   implements vscode.TreeDataProvider<ChallengeTreeItem>

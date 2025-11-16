@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { CodingChallengeProvider, ChallengeTreeItem } from "./utils/codingChallengeProvider";
 import { markChallengeCompleted } from "./utils/userInfo";
 
-let extensionContext: vscode.ExtensionContext;
+let extensionContext: vscode.ExtensionContext | null = null;
 
 export function activate(context: vscode.ExtensionContext) {
   extensionContext = context;
@@ -22,7 +22,6 @@ export function activate(context: vscode.ExtensionContext) {
       (node: ChallengeTreeItem) => markChallengeCompleted(node.description as string)
     ),
   ];
-
   context.subscriptions.push(...disposables);
 }
 
@@ -30,5 +29,5 @@ export function activate(context: vscode.ExtensionContext) {
 export function deactivate() {}
 
 export function getGlobalState() {
-  return extensionContext.globalState;
+  return extensionContext?.globalState;
 }

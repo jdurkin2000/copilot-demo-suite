@@ -1,4 +1,4 @@
-import { commands } from "vscode";
+import { commands, window } from "vscode";
 import { getGlobalState } from "../extension";
 import { UserProgress } from "../models/userProgress";
 
@@ -12,11 +12,17 @@ const defaultProgress: UserProgress = {
 };
 
 export function loadProgress(): UserProgress {
-  return getGlobalState().get<UserProgress>(PROGRESS_KEY, defaultProgress);
+    const state = getGlobalState();
+    if (!state) {
+        window.showErrorMessage("Could not load user storage. Progress for this session will not be saved");
+        return defaultProgress;
+    }
+
+  return state.get<UserProgress>(PROGRESS_KEY, defaultProgress);
 }
 
 export function saveProgress(progress: UserProgress) {
-    getGlobalState().update(PROGRESS_KEY, progress);
+    getGlobalState()?.update(PROGRESS_KEY, progress);
 }
 
 export function hasCompletedChallenge(challenge_id: string): boolean {
